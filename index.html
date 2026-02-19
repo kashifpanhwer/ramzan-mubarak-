@@ -3,196 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Islamic Pro | Tasbeeh & Names</title>
+    <title>Islamic Pro | Ramzan 2026</title>
     
     <link rel="manifest" href="data:application/manifest+json,{'name':'Islamic Pro','short_name':'IslamicApp','start_url':'.','display':'standalone','background_color':'#010f0c','theme_color':'#d4af37','icons':[{'src':'https://cdn-icons-png.flaticon.com/512/2913/2913340.png','sizes':'512x512','type':'image/png'}]}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Islamic Pro">
 
     <style>
-        :root {
-            --gold: #d4af37;
-            --bg: #010a08;
-            --glass: rgba(255, 255, 255, 0.07);
-        }
-
+        :root { --gold: #d4af37; --bg: #010a08; --glass: rgba(255, 255, 255, 0.08); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            background: var(--bg); color: white; 
-            font-family: -apple-system, system-ui, sans-serif;
-            margin: 0; padding-bottom: 100px;
-        }
+        body { background: var(--bg); color: white; font-family: -apple-system, sans-serif; margin: 0; padding-bottom: 100px; }
 
-        /* Premium Header */
-        .app-header {
-            padding: 50px 20px 20px; text-align: center;
-            background: linear-gradient(to bottom, rgba(212,175,55,0.1), transparent);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        /* Header */
+        .header { padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); }
+        .title { font-size: 1.8rem; font-weight: 800; color: var(--gold); letter-spacing: 2px; margin: 0; }
 
-        .main-title { font-size: 1.8rem; font-weight: 800; color: var(--gold); letter-spacing: 2px; }
-
-        /* Install App Section */
-        .install-container { padding: 15px 20px; display: none; id="install-banner" }
-        .install-btn {
-            background: var(--gold); color: black; padding: 15px; border-radius: 15px;
-            text-align: center; font-weight: 800; cursor: pointer; box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+        /* 🔥 New Professional Install Button */
+        #install-section {
+            background: linear-gradient(135deg, #d4af37, #f1d3a1);
+            color: #000; padding: 15px; margin: 15px; border-radius: 15px;
+            text-align: center; font-weight: bold; cursor: pointer;
+            display: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
 
-        /* Tasbeeh Digital Look */
-        .tasbeeh-machine {
-            background: #0a1f1a; border: 8px solid #1a332d; border-radius: 50px;
-            padding: 30px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .digital-screen {
-            background: #8fa391; color: #1a1a1a; font-family: 'Courier New', monospace;
-            font-size: 4rem; padding: 10px; border-radius: 10px; font-weight: 900;
-            border: 4px inset rgba(0,0,0,0.2); margin-bottom: 20px;
-        }
-        .tap-button {
-            width: 120px; height: 120px; background: radial-gradient(circle, #d4af37, #b8860b);
-            border-radius: 50%; border: 5px solid #8b6508; margin: auto;
-            cursor: pointer; box-shadow: 0 10px 0 #7a5906; transition: 0.1s;
-        }
-        .tap-button:active { transform: translateY(5px); box-shadow: 0 5px 0 #7a5906; }
+        /* Tasbeeh */
+        .tasbeeh-card { background: #0a1f1a; border-radius: 40px; padding: 30px; text-align: center; border: 4px solid #1a332d; }
+        .digital-box { background: #8fa391; color: #1a1a1a; font-family: monospace; font-size: 4.5rem; border-radius: 10px; margin-bottom: 20px; font-weight: bold; border: 5px inset rgba(0,0,0,0.1); }
+        .btn-tap { width: 130px; height: 130px; background: radial-gradient(circle, var(--gold), #8b6508); border-radius: 50%; margin: auto; border: 6px solid #4a3704; box-shadow: 0 10px 0 #332602; cursor: pointer; }
+        .btn-tap:active { transform: translateY(6px); box-shadow: 0 4px 0 #332602; }
 
-        /* 99 Names Professional Grid */
-        .names-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .name-card {
-            background: var(--glass); border: 1px solid rgba(212,175,55,0.2);
-            border-radius: 20px; padding: 15px; text-align: center;
-        }
-        .arabic { font-size: 1.8rem; color: var(--gold); margin-bottom: 5px; }
+        /* Names Grid */
+        .names-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .name-card { background: var(--glass); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 15px; text-align: center; }
+        .ar { font-size: 1.8rem; color: var(--gold); }
 
-        /* Navigation Bar */
-        .tab-bar {
-            position: fixed; bottom: 25px; left: 20px; right: 20px;
-            background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(15px);
-            border-radius: 30px; display: flex; justify-content: space-around;
-            padding: 12px; border: 1px solid rgba(255,255,255,0.1);
-        }
-        .tab-item { text-align: center; color: #666; cursor: pointer; flex: 1; }
-        .tab-item.active { color: var(--gold); }
-        .nav-text { font-size: 0.7rem; display: block; margin-top: 5px; font-weight: bold; }
+        /* Nav Bar */
+        .nav { position: fixed; bottom: 25px; left: 20px; right: 20px; background: rgba(15,15,15,0.95); backdrop-filter: blur(10px); border-radius: 30px; display: flex; padding: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .nav-item { flex: 1; text-align: center; color: #555; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
+        .nav-item.active { color: var(--gold); }
 
-        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section { display: none; animation: fadeIn 0.3s ease; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-<div class="app-header">
-    <div class="main-title">RAMZAN MUBARAK</div>
+<div class="header">
+    <p class="title">RAMZAN MUBARAK</p>
 </div>
 
-<div class="install-container" id="install-ui">
-    <div class="install-btn" onclick="installApp()">📥 DOWNLOAD APP</div>
+<div id="install-section" onclick="triggerInstall()">
+    📥 INSTALL OFFICIAL APP
 </div>
 
 <div class="container">
-    
     <div id="tasbeeh" class="section active">
-        <div class="tasbeeh-machine">
-            <div id="count-display" class="digital-screen">000</div>
-            <div id="zikr-label" style="color: var(--gold); margin-bottom: 20px; letter-spacing: 2px; font-weight: bold;">SUBHANALLAH</div>
-            <div class="tap-button" onclick="tasbeehTap()"></div>
-            <p onclick="resetCount()" style="margin-top: 25px; opacity: 0.5; font-size: 0.8rem;">RESET COUNTER</p>
+        <div class="tasbeeh-card">
+            <div id="counter" class="digital-box">00</div>
+            <p id="zikr-label" style="color:var(--gold); font-weight:bold; letter-spacing:2px;">SUBHANALLAH</p>
+            <div class="btn-tap" onclick="countTap()"></div>
+            <p onclick="countReset()" style="margin-top:20px; opacity:0.5; font-size:0.8rem;">RESET</p>
         </div>
     </div>
 
     <div id="names" class="section">
-        <div class="names-grid" id="names-container">
-            </div>
+        <div class="names-grid" id="grid"></div>
     </div>
-
 </div>
 
-<div class="tab-bar">
-    <div class="tab-item active" onclick="nav('tasbeeh', this)">
-        <span style="font-size: 1.5rem;">📿</span>
-        <span class="nav-text">TASBEEH</span>
-    </div>
-    <div class="tab-item" onclick="nav('names', this)">
-        <span style="font-size: 1.5rem;">✨</span>
-        <span class="nav-text">99 NAMES</span>
-    </div>
+<div class="nav">
+    <div class="nav-item active" onclick="tab('tasbeeh', this)">📿<br>TASBEEH</div>
+    <div class="nav-item" onclick="tab('names', this)">✨<br>99 NAMES</div>
 </div>
 
 <script>
-    // Tab Navigation
-    function nav(id, el) {
+    // Tab System
+    function tab(id, el) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         el.classList.add('active');
-        if(navigator.vibrate) navigator.vibrate(10);
     }
 
-    // Tasbeeh Logic
-    let count = 0;
-    function tasbeehTap() {
-        count++;
-        let display = document.getElementById('count-display');
-        display.innerText = count.toString().padStart(3, '0');
-        
+    // Tasbeeh
+    let c = 0;
+    function countTap() {
+        c++;
+        document.getElementById('counter').innerText = c.toString().padStart(2, '0');
         if(navigator.vibrate) navigator.vibrate(25);
-
-        let zikr = document.getElementById('zikr-label');
-        if(count == 33 || count == 66 || count == 99) {
-            if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
-        }
-        
-        if(count <= 33) zikr.innerText = "SUBHANALLAH";
-        else if(count <= 66) zikr.innerText = "ALHAMDULILLAH";
-        else zikr.innerText = "ALLAHU AKBAR";
+        let lbl = document.getElementById('zikr-label');
+        if(c <= 33) lbl.innerText = "SUBHANALLAH";
+        else if(c <= 66) lbl.innerText = "ALHAMDULILLAH";
+        else lbl.innerText = "ALLAHU AKBAR";
     }
+    function countReset() { c = 0; document.getElementById('counter').innerText = "00"; }
 
-    function resetCount() {
-        count = 0;
-        document.getElementById('count-display').innerText = "000";
-        document.getElementById('zikr-label').innerText = "SUBHANALLAH";
-    }
+    // Full 99 Names
+    const n = [{ar:"الرحمن",en:"Ar-Rahman"},{ar:"الرحيم",en:"Ar-Rahim"},{ar:"الملك",en:"Al-Malik"},{ar:"القدوس",en:"Al-Quddus"},{ar:"السلام",en:"As-Salam"},{ar:"المؤمن",en:"Al-Mu'min"},{ar:"المهيمن",en:"Al-Muhaymin"},{ar:"العزيز",en:"Al-Aziz"},{ar:"الجبار",en:"Al-Jabbar"},{ar:"المتكبر",en:"Al-Mutakabbir"},{ar:"الخالق",en:"Al-Khaliq"},{ar:"البارئ",en:"Al-Bari"},{ar:"المصور",en:"Al-Musawwir"},{ar:"الغفار",en:"Al-Ghaffar"},{ar:"القهار",en:"Al-Qahhar"},{ar:"الوهاب",en:"Al-Wahhab"},{ar:"الرزاق",en:"Ar-Razzaq"},{ar:"الفتاح",en:"Al-Fattah"},{ar:"العليم",en:"Al-Alim"},{ar:"القابض",en:"Al-Qabid"},{ar:"الباسط",en:"Al-Basit"},{ar:"الخافض",en:"Al-Khafid"},{ar:"الرافع",en:"Ar-Rafi"},{ar:"المعز",en:"Al-Mu'izz"},{ar:"المذل",en:"Al-Mudhill"},{ar:"السميع",en:"As-Sami"},{ar:"البصير",en:"Al-Basir"},{ar:"الحكم",en:"Al-Hakam"},{ar:"العدل",en:"Al-Adl"},{ar:"اللطيف",en:"Al-Latif"},{ar:"الخبير",en:"Al-Khabir"},{ar:"الحليم",en:"Al-Halim"},{ar:"العظيم",en:"Al-Azim"},{ar:"الغفور",en:"Al-Ghafur"},{ar:"الشكور",en:"Ash-Shakur"},{ar:"العلي",en:"Al-Ali"},{ar:"الكبير",en:"Al-Kabir"},{ar:"الحفيظ",en:"Al-Hafiz"},{ar:"المقیت",en:"Al-Muqit"},{ar:"الحسيب",en:"Al-Hasib"},{ar:"الجليل",en:"Al-Jalil"},{ar:"الكريم",en:"Al-Karim"},{ar:"الرقيب",en:"Ar-Raqib"},{ar:"المجيب",en:"Al-Mujib"},{ar:"الواسع",en:"Al-Wasi"},{ar:"الحكيم",en:"Al-Hakim"},{ar:"الودود",en:"Al-Wadud"},{ar:"المجيد",en:"Al-Majid"},{ar:"الباعث",en:"Al-Ba'ith"},{ar:"الشهيد",en:"Ash-Shahid"},{ar:"الحق",en:"Al-Haqq"},{ar:"الوكيل",en:"Al-Wakil"},{ar:"القوي",en:"Al-Qawi"},{ar:"المتين",en:"Al-Matin"},{ar:"الولي",en:"Al-Wali"},{ar:"الحميد",en:"Al-Hamid"},{ar:"المحصي",en:"Al-Muhsi"},{ar:"المبدئ",en:"Al-Mubdi"},{ar:"المعيد",en:"Al-Mu'id"},{ar:"المحيي",en:"Al-Muhyi"},{ar:"المميت",en:"Al-Mumit"},{ar:"الحي",en:"Al-Hayy"},{ar:"القيوم",en:"Al-Qayyum"},{ar:"الواجد",en:"Al-Wajid"},{ar:"الماجد",en:"Al-Majid"},{ar:"الواحد",en:"Al-Wahid"},{ar:"الأحد",en:"Al-Ahad"},{ar:"الصمد",en:"As-Samad"},{ar:"القادر",en:"Al-Qadir"},{ar:"المقتدر",en:"Al-Muqtadir"},{ar:"المقدم",en:"Al-Muqaddim"},{ar:"المؤخر",en:"Al-Mu'akhkhir"},{ar:"الأول",en:"Al-Awwal"},{ar:"الآخر",en:"Al-Akhir"},{ar:"الظاهر",en:"Az-Zahir"},{ar:"الباطن",en:"Al-Batin"},{ar:"الوالي",en:"Al-Wali"},{ar:"المتعالي",en:"Al-Muta'ali"},{ar:"البر",en:"Al-Barr"},{ar:"التواب",en:"At-Tawwab"},{ar:"المنتقم",en:"Al-Muntaqim"}, {ar: "العفو", en: "Al-Afuww"}, {ar: "الرؤوف", en: "Ar-Ra'uf"}, {ar: "مالك الملك", en: "Malik-ul-Mulk"}, {ar: "ذو الجلال والإكرام", en: "Dhul-Jalali-wal-Ikram"}, {ar: "المقسط", en: "Al-Muqsit"}, {ar: "الجامع", en: "Al-Jami"}, {ar: "الغني", en: "Al-Ghani"}, {ar: "المغني", en: "Al-Mughni"}, {ar: "المانع", en: "Al-Mani"}, {ar: "الضار", en: "Ad-Darr"}, {ar: "النافع", en: "An-Nafi"}, {ar: "النور", en: "An-Nur"}, {ar: "الهادي", en: "Al-Hadi"}, {ar: "البديع", en: "Al-Badi"}, {ar: "الباقي", en: "Al-Baqi"}, {ar: "الوارث", en: "Al-Warith"}, {ar: "الرشيد", en: "Ar-Rashid"}, {ar: "الصبور", en: "As-Sabur"}];
+    const g = document.getElementById('grid');
+    n.forEach(x => { g.innerHTML += `<div class="name-card" onclick="sp('${x.en}')"><div class="ar">${x.ar}</div><div style="font-size:0.7rem; opacity:0.5;">${x.en}</div></div>`; });
+    function sp(t){ let u=new SpeechSynthesisUtterance(t); u.rate=0.8; speechSynthesis.speak(u); }
 
-    // Full 99 Names Array
-    const allahNames = [
-        {ar:"الرحمن", en:"Ar-Rahman"}, {ar:"الرحيم", en:"Ar-Rahim"}, {ar:"الملك", en:"Al-Malik"}, {ar:"القدوس", en:"Al-Quddus"}, {ar:"السلام", en:"As-Salam"}, {ar:"المؤمن", en:"Al-Mu'min"}, {ar:"المهيمن", en:"Al-Muhaymin"}, {ar:"العزيز", en:"Al-Aziz"}, {ar:"الجبار", en:"Al-Jabbar"}, {ar:"المتكبر", en:"Al-Mutakabbir"}, {ar:"الخالق", en:"Al-Khaliq"}, {ar:"البارئ", en:"Al-Bari"}, {ar:"المصور", en:"Al-Musawwir"}, {ar:"الغفار", en:"Al-Ghaffar"}, {ar:"القهار", en:"Al-Qahhar"}, {ar:"الوهاب", en:"Al-Wahhab"}, {ar:"الرزاق", en:"Ar-Razzaq"}, {ar:"الفتاح", en:"Al-Fattah"}, {ar:"العليم", en:"Al-Alim"}, {ar:"القابض", en:"Al-Qabid"}, {ar:"الباسط", en:"Al-Basit"}, {ar:"الخافض", en:"Al-Khafid"}, {ar:"الرافع", en:"Ar-Rafi"}, {ar:"المعز", en:"Al-Mu'izz"}, {ar:"المذل", en:"Al-Mudhill"}, {ar:"السميع", en:"As-Sami"}, {ar:"البصير", en:"Al-Basir"}, {ar:"الحكم", en:"Al-Hakam"}, {ar:"العدل", en:"Al-Adl"}, {ar:"اللطيف", en:"Al-Latif"}, {ar:"الخبير", en:"Al-Khabir"}, {ar:"الحليم", en:"Al-Halim"}, {ar:"العظيم", en:"Al-Azim"}, {ar:"الغفور", en:"Al-Ghafur"}, {ar:"الشكور", en:"Ash-Shakur"}, {ar:"العلي", en:"Al-Ali"}, {ar:"الكبير", en:"Al-Kabir"}, {ar:"الحفيظ", en:"Al-Hafiz"}, {ar:"المقيت", en:"Al-Muqit"}, {ar:"الحسيب", en:"Al-Hasib"}, {ar:"الجليل", en:"Al-Jalil"}, {ar:"الكريم", en:"Al-Karim"}, {ar:"الرقيب", en:"Ar-Raqib"}, {ar:"المجيب", en:"Al-Mujib"}, {ar:"الواسع", en:"Al-Wasi"}, {ar:"الحكيم", en:"Al-Hakim"}, {ar:"الودود", en:"Al-Wadud"}, {ar:"المجيد", en:"Al-Majid"}, {ar:"الباعث", en:"Al-Ba'ith"}, {ar:"الشهيد", en:"Ash-Shahid"}, {ar:"الحق", en:"Al-Haqq"}, {ar:"الوكيل", en:"Al-Wakil"}, {ar:"القوي", en:"Al-Qawi"}, {ar:"المتين", en:"Al-Matin"}, {ar:"الولي", en:"Al-Wali"}, {ar:"الحميد", en:"Al-Hamid"}, {ar:"المحصي", en:"Al-Muhsi"}, {ar:"المبدئ", en:"Al-Mubdi"}, {ar:"المعيد", en:"Al-Mu'id"}, {ar:"المحيي", en:"Al-Muhyi"}, {ar:"المميت", en:"Al-Mumit"}, {ar:"الحي", en:"Al-Hayy"}, {ar:"القيوم", en:"Al-Qayyum"}, {ar:"الواجد", en:"Al-Wajid"}, {ar:"الماجد", en:"Al-Majid"}, {ar:"الواحد", en:"Al-Wahid"}, {ar:"الأحد", en:"Al-Ahad"}, {ar:"الصمد", en:"As-Samad"}, {ar:"القادر", en:"Al-Qadir"}, {ar:"المقتدر", en:"Al-Muqtadir"}, {ar:"المقدم", en:"Al-Muqaddim"}, {ar:"المؤخر", en:"Al-Mu'akhkhir"}, {ar:"الأول", en:"Al-Awwal"}, {ar:"الآخر", en:"Al-Akhir"}, {ar:"الظاهر", en:"Az-Zahir"}, {ar:"الباطن", en:"Al-Batin"}, {ar:"الوالي", en:"Al-Wali"}, {ar:"المتعالي", en:"Al-Muta'ali"}, {ar:"البر", en:"Al-Barr"}, {ar:"التواب", en:"At-Tawwab"}, {ar:"المنتقم", en:"Al-Muntaqim"}, {ar:"العفو", en:"Al-Afuww"}, {ar:"الرؤوف", en:"Ar-Ra'uf"}, {ar:"مالك الملك", en:"Malik-ul-Mulk"}, {ar:"ذو الجلال والإكرام", en:"Dhul-Jalali-wal-Ikram"}, {ar:"المقسط", en:"Al-Muqsit"}, {ar:"الجامع", en:"Al-Jami"}, {ar:"الغني", en:"Al-Ghani"}, {ar:"المغني", en:"Al-Mughni"}, {ar:"المانع", en:"Al-Mani"}, {ar:"الضار", en:"Ad-Darr"}, {ar:"النافع", en:"An-Nafi"}, {ar:"النور", en:"An-Nur"}, {ar:"الهادي", en:"Al-Hadi"}, {ar:"البديع", en:"Al-Badi"}, {ar:"الباقي", en:"Al-Baqi"}, {ar:"الوارث", en:"Al-Warith"}, {ar:"الرشيد", en:"Ar-Rashid"}, {ar:"الصبور", en:"As-Sabur"}
-    ];
-
-    const container = document.getElementById('names-container');
-    allahNames.forEach(n => {
-        container.innerHTML += `<div class="name-card" onclick="speak('${n.en}')">
-            <div class="arabic">${n.ar}</div>
-            <div style="font-size: 0.7rem; opacity: 0.5;">${n.en}</div>
-        </div>`;
-    });
-
-    function speak(name) {
-        let u = new SpeechSynthesisUtterance(name);
-        u.rate = 0.8;
-        speechSynthesis.speak(u);
-    }
-
-    // PWA Install Logic
+    // --- 📥 SMART INSTALL LOGIC ---
     let deferredPrompt;
+    const installBtn = document.getElementById('install-section');
+
+    // Android / Chrome Logic
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        document.getElementById('install-ui').style.display = 'block';
+        installBtn.style.display = 'block';
     });
 
-    function installApp() {
-        if(deferredPrompt) {
+    // iPhone (iOS) Logic - Since iOS doesn't support the button, we show a tip
+    if (navigator.standalone === false && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        installBtn.style.display = 'block';
+        installBtn.innerText = "📲 ADD TO HOME SCREEN (iOS Tip)";
+    }
+
+    function triggerInstall() {
+        if (deferredPrompt) {
             deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(() => {
-                document.getElementById('install-ui').style.display = 'none';
+            deferredPrompt.userChoice.then((choice) => {
+                if (choice.outcome === 'accepted') installBtn.style.display = 'none';
             });
+        } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            alert("iPhone par install karne ke liye: \n1. Niche 'Share' button par click karein.\n2. Phir 'Add to Home Screen' select karein.");
+        } else {
+            alert("App install karne ke liye browser menu mein ja kar 'Install App' ya 'Add to Home Screen' par click karein.");
         }
     }
 </script>
-
 </body>
 </html>
